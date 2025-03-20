@@ -34,7 +34,7 @@ Tourist Guide is a mobile application built using Android Studio, Java, and XML.
 ## 🛠️ Installation & Setup
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/TouristGuideApp.git
+   git clone https://github.com/DjalilX/Tourist_Guide_app.git
    ```
 2. Open the project in **Android Studio**.
 3. Run the app on an emulator or a physical device.
