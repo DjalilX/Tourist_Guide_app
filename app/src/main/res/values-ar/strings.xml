@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">دليل السياحة</string>
+    <string name="app_description">مرحبًا بكم في تطبيق دليل السياحة.</string>
+    <string name="student_names">جون دو، جين سميث، أليكس جونسون</string>
+    <string name="btnChangeLanguage">تغيير اللغة</string>
+    <string name="category_tourist_sites">المواقع السياحية</string>
+    <string name="category_hotels">الفنادق</string>
+    <string name="category_restaurants">المطاعم</string>
+</resources>

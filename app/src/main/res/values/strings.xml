@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Tourist Guide</string>
+    <string name="app_description">Welcome to the Tourist Guide App.</string>
+    <string name="student_names">John Doe, Jane Smith, Alex Johnson</string>
+    <string name="btnChangeLanguage">Change Language</string>
+    <string name="category_tourist_sites">Tourist Sites</string>
+    <string name="category_hotels">Hotels</string>
+    <string name="category_restaurants">Restaurants</string>
+</resources>
