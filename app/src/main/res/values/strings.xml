@@ -1,4 +1,5 @@
 <resources>
+    <!-- Existing strings -->
     <string name="app_name">Tourist Guide</string>
     <string name="app_description">Welcome to the Tourist Guide App.</string>
     <string name="student_names">John Doe, Jane Smith, Alex Johnson</string>
@@ -6,6 +7,11 @@
     <string name="category_tourist_sites">Tourist Sites</string>
     <string name="category_hotels">Hotels</string>
     <string name="category_restaurants">Restaurants</string>
+    <!-- Title strings -->
+    <string name="title_tourist_sites">Tourist Sites</string>
+    <string name="title_hotels">Hotels</string>
+    <string name="title_restaurants">Restaurants</string>
+    <!-- Place strings -->
     <string name="eiffel_tower_name">Eiffel Tower</string>
     <string name="eiffel_tower_desc">Famous landmark in Paris</string>
     <string name="hilton_hotel_name">Hilton Hotel</string>

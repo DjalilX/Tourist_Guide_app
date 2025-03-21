@@ -1,4 +1,5 @@
 <resources>
+    <!-- Existing strings -->
     <string name="app_name">دليل السياحة</string>
     <string name="app_description">مرحبًا بكم في تطبيق دليل السياحة.</string>
     <string name="student_names">جون دو، جين سميث، أليكس جونسون</string>
@@ -6,6 +7,11 @@
     <string name="category_tourist_sites">المواقع السياحية</string>
     <string name="category_hotels">الفنادق</string>
     <string name="category_restaurants">المطاعم</string>
+    <!-- Title strings -->
+    <string name="title_tourist_sites">المواقع السياحية</string>
+    <string name="title_hotels">الفنادق</string>
+    <string name="title_restaurants">المطاعم</string>
+    <!-- Place strings -->
     <string name="eiffel_tower_name">برج إيفل</string>
     <string name="eiffel_tower_desc">معلم شهير في باريس</string>
     <string name="hilton_hotel_name">فندق هيلتون</string>

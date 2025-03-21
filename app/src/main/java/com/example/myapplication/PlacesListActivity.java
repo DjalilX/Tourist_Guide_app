@@ -36,6 +36,7 @@ public class PlacesListActivity extends BaseActivity {
         }
         Log.d(TAG, "Received category: " + category);
 
+        // Set initial title (optional fallback, can be removed if handled fully in getPlacesByCategory)
         setTitle(category);
 
         places = getPlacesByCategory(category);
@@ -52,18 +53,20 @@ public class PlacesListActivity extends BaseActivity {
         Log.d(TAG, "Current locale: " + getResources().getConfiguration().getLocales().get(0));
     }
 
-    // Replace the old method with this updated version
     private List<Place> getPlacesByCategory(String category) {
         List<Place> list = new ArrayList<>();
         if (category.equals("Tourist Sites")) {
+            setTitle(getString(R.string.title_tourist_sites));
             list.add(new Place(getString(R.string.eiffel_tower_name),
                     getString(R.string.eiffel_tower_desc),
                     R.drawable.eiffel_tower, "+33 1 23 45 67 89", "https://www.toureiffel.paris"));
         } else if (category.equals("Hotels")) {
+            setTitle(getString(R.string.title_hotels));
             list.add(new Place(getString(R.string.hilton_hotel_name),
                     getString(R.string.hilton_hotel_desc),
                     R.drawable.hotel, "+1 800 445 8667", "https://www.hilton.com"));
         } else if (category.equals("Restaurants")) {
+            setTitle(getString(R.string.title_restaurants));
             list.add(new Place(getString(R.string.le_gourmet_name),
                     getString(R.string.le_gourmet_desc),
                     R.drawable.restaurant, "+33 1 98 76 54 32", "https://www.legourmet.fr"));

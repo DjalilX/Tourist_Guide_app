@@ -1,30 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_tourist_sites"
-        android:title="@string/category_tourist_sites"
-        android:icon="@drawable/ic_tourist_sites"
-        app:showAsAction="never"/>
-
+        android:title="@string/category_tourist_sites" />
     <item
         android:id="@+id/action_hotels"
-        android:title="@string/category_hotels"
-        android:icon="@drawable/ic_hotels"
-        app:showAsAction="never"/>
-
+        android:title="@string/category_hotels" />
     <item
         android:id="@+id/action_restaurants"
-        android:title="@string/category_restaurants"
-        android:icon="@drawable/ic_restaurants"
-        app:showAsAction="never"/>
-
-    <!-- Language Toggle -->
+        android:title="@string/category_restaurants" />
     <item
         android:id="@+id/action_toggle_language"
-        android:title="@string/btnChangeLanguage"
-        android:icon="@drawable/ic_language"
-        app:showAsAction="ifRoom"/>
-
+        android:title="@string/btnChangeLanguage" />
 </menu>
