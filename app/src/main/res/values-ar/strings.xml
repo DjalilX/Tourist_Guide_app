@@ -6,4 +6,10 @@
     <string name="category_tourist_sites">المواقع السياحية</string>
     <string name="category_hotels">الفنادق</string>
     <string name="category_restaurants">المطاعم</string>
+    <string name="eiffel_tower_name">برج إيفل</string>
+    <string name="eiffel_tower_desc">معلم شهير في باريس</string>
+    <string name="hilton_hotel_name">فندق هيلتون</string>
+    <string name="hilton_hotel_desc">فندق فاخر بخدمات رائعة</string>
+    <string name="le_gourmet_name">لو غورميه</string>
+    <string name="le_gourmet_desc">تناول طعام فاخر مع المطبخ الفرنسي</string>
 </resources>

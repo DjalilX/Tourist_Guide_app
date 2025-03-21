@@ -6,4 +6,10 @@
     <string name="category_tourist_sites">Tourist Sites</string>
     <string name="category_hotels">Hotels</string>
     <string name="category_restaurants">Restaurants</string>
+    <string name="eiffel_tower_name">Eiffel Tower</string>
+    <string name="eiffel_tower_desc">Famous landmark in Paris</string>
+    <string name="hilton_hotel_name">Hilton Hotel</string>
+    <string name="hilton_hotel_desc">Luxury hotel with great services</string>
+    <string name="le_gourmet_name">Le Gourmet</string>
+    <string name="le_gourmet_desc">Fine dining with French cuisine</string>
 </resources>
