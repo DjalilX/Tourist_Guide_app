@@ -16,7 +16,7 @@ import com.example.myapplication.models.Place;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlacesListActivity extends AppCompatActivity {
+public class PlacesListActivity extends BaseActivity  {
 
     private List<Place> places;
 

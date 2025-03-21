@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.SharedPreferences;
 
-public class PlaceDetailsActivity extends AppCompatActivity {
+public class PlaceDetailsActivity extends BaseActivity  {
 
     private ImageView placeImage;
     private TextView placeName, placeDescription;

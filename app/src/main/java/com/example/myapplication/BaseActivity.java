@@ -1,3 +1,4 @@
+// BaseActivity.java - Common Toolbar Handling
 package com.example.myapplication;
 
 import android.content.Intent;
@@ -6,20 +7,25 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import java.util.Locale;
 
-
-public class MainActivity extends BaseActivity  {
-
+public class BaseActivity extends AppCompatActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    }
 
+    protected void setupToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
@@ -32,7 +38,10 @@ public class MainActivity extends BaseActivity  {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_tourist_sites) {
+        if (id == android.R.id.home) {
+            finish();
+            return true;
+        } else if (id == R.id.action_tourist_sites) {
             openCategory("Tourist Sites");
         } else if (id == R.id.action_hotels) {
             openCategory("Hotels");
@@ -53,8 +62,6 @@ public class MainActivity extends BaseActivity  {
     private void toggleLanguage() {
         SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
         String currentLang = prefs.getString("language", "en");
-
-        // Toggle between English & Arabic
         String newLang = currentLang.equals("en") ? "ar" : "en";
         setLocale(newLang);
     }
@@ -66,22 +73,11 @@ public class MainActivity extends BaseActivity  {
         config.setLocale(locale);
         getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 
-        // Save language preference
         SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("language", lang);
         editor.apply();
 
-        // Restart activity to apply changes
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-    }
-
-    private void loadLocale() {
-        SharedPreferences prefs = getSharedPreferences("Settings", MODE_PRIVATE);
-        String language = prefs.getString("language", "en");
-        setLocale(language);
+        recreate();
     }
 }
