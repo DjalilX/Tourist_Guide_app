@@ -1,5 +1,4 @@
 <resources>
-    <!-- Existing strings -->
     <string name="app_name">Algiers Tourist Guide</string>
     <string name="app_description">Welcome to the Algiers Tourist Guide App, your companion for exploring the vibrant capital of Algeria. Discover iconic landmarks, cozy hotels, and delicious dining options in Algiers.</string>
     <string name="student_names">John Doe, Jane Smith, Alex Johnson</string>
@@ -7,11 +6,15 @@
     <string name="category_tourist_sites">Tourist Sites</string>
     <string name="category_hotels">Hotels</string>
     <string name="category_restaurants">Restaurants</string>
-    <!-- Title strings -->
+    <string name="category_favorites">Favorites</string>
     <string name="title_tourist_sites">Tourist Sites</string>
     <string name="title_hotels">Hotels</string>
     <string name="title_restaurants">Restaurants</string>
-    <!-- Place strings -->
+    <string name="place_image_desc">Photo of the place</string>
+    <string name="favorite_toggle_desc">Toggle favorite status</string>
+    <string name="search">Search</string>
+    <string name="no_places">No places available</string>
+
     <!-- Tourist Sites -->
     <string name="martyrs_memorial_name">Martyrs’ Memorial</string>
     <string name="martyrs_memorial_desc">An iconic monument in Algiers commemorating the Algerian War of Independence, offering stunning views of the city.</string>

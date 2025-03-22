@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_tourist_sites"
-        android:title="@string/category_tourist_sites" />
-    <item
-        android:id="@+id/action_hotels"
-        android:title="@string/category_hotels" />
-    <item
-        android:id="@+id/action_restaurants"
-        android:title="@string/category_restaurants" />
-    <item
-        android:id="@+id/action_toggle_language"
-        android:title="@string/btnChangeLanguage" />
+        android:id="@+id/action_search"
+        android:title="@string/search"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="always"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
 </menu>

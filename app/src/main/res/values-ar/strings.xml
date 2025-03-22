@@ -1,5 +1,4 @@
 <resources>
-    <!-- Existing strings -->
     <string name="app_name">دليل سياحة الجزائر العاصمة</string>
     <string name="app_description">مرحبًا بكم في تطبيق دليل سياحة الجزائر العاصمة، رفيقكم لاستكشاف عاصمة الجزائر النابضة بالحياة. اكتشفوا المعالم البارزة والفنادق المريحة وخيارات الطعام اللذيذة في الجزائر العاصمة.</string>
     <string name="student_names">جون دو، جين سميث، أليكس جونسون</string>
@@ -7,11 +6,15 @@
     <string name="category_tourist_sites">المواقع السياحية</string>
     <string name="category_hotels">الفنادق</string>
     <string name="category_restaurants">المطاعم</string>
-    <!-- Title strings -->
+    <string name="category_favorites">المفضلات</string>
     <string name="title_tourist_sites">المواقع السياحية</string>
     <string name="title_hotels">الفنادق</string>
     <string name="title_restaurants">المطاعم</string>
-    <!-- Place strings -->
+    <string name="place_image_desc">صورة المكان</string>
+    <string name="favorite_toggle_desc">تبديل حالة المفضلة</string>
+    <string name="search">بحث</string>
+    <string name="no_places">لا توجد أماكن متاحة</string>
+
     <!-- Tourist Sites -->
     <string name="martyrs_memorial_name">نصب الشهداء</string>
     <string name="martyrs_memorial_desc">نصب تذكاري بارز في الجزائر العاصمة يخلد حرب الاستقلال الجزائرية، ويوفر إطلالات رائعة على المدينة.</string>

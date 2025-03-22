@@ -3,8 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -19,7 +18,8 @@
         android:id="@+id/imageViewPlace"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/place_image_desc"/>
 
     <TextView
         android:id="@+id/textViewPlaceName"
@@ -68,6 +68,13 @@
             android:id="@+id/btnWebsite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Visit Website"/>
+            android:text="Visit Website"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Map"/>
     </LinearLayout>
 </LinearLayout>

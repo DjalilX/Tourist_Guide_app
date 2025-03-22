@@ -1,22 +1,34 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.adapters.PlacesAdapter;
 import com.example.myapplication.models.Place;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class PlacesListActivity extends BaseActivity {
 
     private static final String TAG = "PlacesListActivity";
+    private PlacesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +43,9 @@ public class PlacesListActivity extends BaseActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         ProgressBar progressBar = findViewById(R.id.progressBar);
+        TextView tvEmpty = findViewById(R.id.tvEmpty);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_fade_in));
 
         String category = getIntent().getStringExtra("category");
         if (category == null) {
@@ -39,63 +53,89 @@ public class PlacesListActivity extends BaseActivity {
         }
         Log.d(TAG, "Received category: " + category);
 
-        // Set title early for responsiveness
         setTitle(getString(category.equals("Tourist Sites") ? R.string.title_tourist_sites :
-                category.equals("Hotels") ? R.string.title_hotels : R.string.title_restaurants));
+                category.equals("Hotels") ? R.string.title_hotels :
+                        category.equals("Restaurants") ? R.string.title_restaurants : R.string.category_favorites));
 
-        progressBar.setVisibility(View.VISIBLE); // Show loading
+        progressBar.setVisibility(View.VISIBLE);
         List<Place> places = getPlacesByCategory(category);
 
         if (places == null || places.isEmpty()) {
             Log.e(TAG, "Error: No places found for category: " + category);
-            Toast.makeText(this, "No places available for " + category, Toast.LENGTH_SHORT).show();
             progressBar.setVisibility(View.GONE);
-            finish();
-            return;
+            tvEmpty.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            adapter = new PlacesAdapter(this, places);
+            recyclerView.setAdapter(adapter);
+            progressBar.setVisibility(View.GONE);
+            tvEmpty.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
         }
-
-        PlacesAdapter adapter = new PlacesAdapter(this, places);
-        recyclerView.setAdapter(adapter);
-        progressBar.setVisibility(View.GONE); // Hide loading
 
         Log.d(TAG, "Current locale: " + getResources().getConfiguration().getLocales().get(0));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return true;
+            }
+        });
+        return true;
+    }
+
     private List<Place> getPlacesByCategory(String category) {
         List<Place> list = new ArrayList<>();
-        if (category.equals("Tourist Sites")) {
-            setTitle(getString(R.string.title_tourist_sites));
-            list.add(new Place(getString(R.string.martyrs_memorial_name),
-                    getString(R.string.martyrs_memorial_desc),
-                    R.drawable.martyrs_memorial, "+213 21 23 45 67", "https://www.algeriatourism.dz", "info@martyrs.dz"));
-            list.add(new Place(getString(R.string.notre_dame_name),
-                    getString(R.string.notre_dame_desc),
-                    R.drawable.notre_dame, "+213 21 78 90 12", "https://www.notredamealger.dz", "contact@notredame.dz"));
-            list.add(new Place(getString(R.string.casbah_name),
-                    getString(R.string.casbah_desc),
-                    R.drawable.casbah, "+213 21 34 56 78", "https://www.casbahalger.dz", "casbah@tourism.dz"));
-        } else if (category.equals("Hotels")) {
-            setTitle(getString(R.string.title_hotels));
-            list.add(new Place(getString(R.string.el_aurassi_name),
-                    getString(R.string.el_aurassi_desc),
-                    R.drawable.el_aurassi, "+213 21 74 82 52", "https://www.el-aurassi.com", "reservation@el-aurassi.com"));
-            list.add(new Place(getString(R.string.sofitel_name),
-                    getString(R.string.sofitel_desc),
-                    R.drawable.sofitel, "+213 21 68 52 10", "https://www.sofitel-alger.com", "book@sofitel-alger.com"));
-            list.add(new Place(getString(R.string.marriott_name),
-                    getString(R.string.marriott_desc),
-                    R.drawable.marriott, "+213 23 47 80 00", "https://www.marriott.com/alger", "info@marriott-alger.com"));
-        } else if (category.equals("Restaurants")) {
-            setTitle(getString(R.string.title_restaurants));
-            list.add(new Place(getString(R.string.le_tantra_name),
-                    getString(R.string.le_tantra_desc),
-                    R.drawable.le_tantra, "+213 21 60 12 34", "https://www.letantra.dz", "tantra@restau.dz"));
-            list.add(new Place(getString(R.string.dar_el_qods_name),
-                    getString(R.string.dar_el_qods_desc),
-                    R.drawable.dar_el_qods, "+213 21 56 78 90", "https://www.darelqods.dz", "contact@darelqods.dz"));
-            list.add(new Place(getString(R.string.el_djazair_name),
-                    getString(R.string.el_djazair_desc),
-                    R.drawable.el_djazair, "+213 21 23 45 67", "https://www.eldjazair.dz", "info@eldjazair.dz"));
+        try {
+            InputStream is = getAssets().open("places.json");
+            byte[] buffer = new byte[is.available()];
+            is.read(buffer);
+            is.close();
+            String json = new String(buffer, "UTF-8");
+            JSONArray jsonArray = new JSONArray(json);
+
+            SharedPreferences prefs = getSharedPreferences("Favorites", MODE_PRIVATE);
+            Set<String> favorites = prefs.getStringSet("favorite_places", new HashSet<>());
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject obj = jsonArray.getJSONObject(i);
+                boolean isFavoriteCategory = category.equals("Favorites");
+                boolean matchesCategory = obj.getString("category").equals(category);
+                boolean isFavorite = favorites.contains(obj.getString("id"));
+
+                if ((isFavoriteCategory && isFavorite) || (!isFavoriteCategory && matchesCategory)) {
+                    String nameKey = obj.getString("name");
+                    String descKey = obj.getString("desc");
+                    int nameResId = getResources().getIdentifier(nameKey, "string", getPackageName());
+                    int descResId = getResources().getIdentifier(descKey, "string", getPackageName());
+                    String name = nameResId != 0 ? getString(nameResId) : nameKey;
+                    String desc = descResId != 0 ? getString(descResId) : descKey;
+
+                    list.add(new Place(
+                            obj.getString("id"),
+                            name,
+                            desc,
+                            getResources().getIdentifier(obj.getString("image"), "drawable", getPackageName()),
+                            obj.getString("phone"),
+                            obj.getString("website"),
+                            obj.getString("email")
+                    ));
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error parsing JSON: " + e.getMessage());
         }
         return list;
     }

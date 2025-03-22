@@ -4,11 +4,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.appcompat.widget.Toolbar;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 public class PlaceDetailsActivity extends BaseActivity {
 
@@ -16,7 +17,7 @@ public class PlaceDetailsActivity extends BaseActivity {
 
     private ImageView placeImage;
     private TextView placeName, placeDescription;
-    private Button btnCall, btnSms, btnEmail, btnWebsite;
+    private Button btnCall, btnSms, btnEmail, btnWebsite, btnMap;
     private String phoneNumber, websiteUrl, email;
 
     @Override
@@ -37,6 +38,7 @@ public class PlaceDetailsActivity extends BaseActivity {
         btnSms = findViewById(R.id.btnSms);
         btnEmail = findViewById(R.id.btnEmail);
         btnWebsite = findViewById(R.id.btnWebsite);
+        btnMap = findViewById(R.id.btnMap);
 
         String name = getIntent().getStringExtra("place_name");
         String description = getIntent().getStringExtra("place_description");
@@ -64,7 +66,6 @@ public class PlaceDetailsActivity extends BaseActivity {
                 Toast.makeText(this, "Dialing " + name, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "No phone number available", Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "Error: Phone number is missing!");
             }
         });
 
@@ -77,7 +78,6 @@ public class PlaceDetailsActivity extends BaseActivity {
                 Toast.makeText(this, "Opening SMS for " + name, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "No phone number available", Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "Error: Phone number is missing for SMS!");
             }
         });
 
@@ -91,7 +91,6 @@ public class PlaceDetailsActivity extends BaseActivity {
                 Toast.makeText(this, "Sending email about " + name, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "No email available", Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "Error: Email is missing!");
             }
         });
 
@@ -102,8 +101,14 @@ public class PlaceDetailsActivity extends BaseActivity {
                 Toast.makeText(this, "Opening website for " + name, Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "No website available", Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "Error: Website URL is missing!");
             }
+        });
+
+        btnMap.setOnClickListener(v -> {
+            String geoUri = "geo:0,0?q=" + Uri.encode(name + ", Algiers");
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
+            startActivity(mapIntent);
+            Toast.makeText(this, "Showing " + name + " on map", Toast.LENGTH_SHORT).show();
         });
 
         Log.d(TAG, "Current locale: " + getResources().getConfiguration().getLocales().get(0));
