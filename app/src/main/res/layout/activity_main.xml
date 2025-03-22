@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- Toolbar (Menu Bar) -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -16,26 +15,32 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"/>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/algiers_header"
+        android:contentDescription="Algiers Skyline"/>
 
-
-    <!-- Description Text -->
     <TextView
         android:id="@+id/tvDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_description"
         android:textSize="18sp"
+        android:textColor="@android:color/black"
         android:padding="16dp"
-        android:gravity="center" />
+        android:gravity="center"
+        android:background="@android:color/white"
+        android:elevation="2dp"/>
 
-    <!-- Student Names -->
     <TextView
         android:id="@+id/tvStudents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/student_names"
         android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
         android:gravity="center"
         android:padding="10dp"/>
-
 </LinearLayout>

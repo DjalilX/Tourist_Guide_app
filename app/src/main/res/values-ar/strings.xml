@@ -1,7 +1,7 @@
 <resources>
     <!-- Existing strings -->
-    <string name="app_name">دليل السياحة</string>
-    <string name="app_description">مرحبًا بكم في تطبيق دليل السياحة.</string>
+    <string name="app_name">دليل سياحة الجزائر العاصمة</string>
+    <string name="app_description">مرحبًا بكم في تطبيق دليل سياحة الجزائر العاصمة، رفيقكم لاستكشاف عاصمة الجزائر النابضة بالحياة. اكتشفوا المعالم البارزة والفنادق المريحة وخيارات الطعام اللذيذة في الجزائر العاصمة.</string>
     <string name="student_names">جون دو، جين سميث، أليكس جونسون</string>
     <string name="btnChangeLanguage">تغيير اللغة</string>
     <string name="category_tourist_sites">المواقع السياحية</string>
@@ -12,10 +12,27 @@
     <string name="title_hotels">الفنادق</string>
     <string name="title_restaurants">المطاعم</string>
     <!-- Place strings -->
-    <string name="eiffel_tower_name">برج إيفل</string>
-    <string name="eiffel_tower_desc">معلم شهير في باريس</string>
-    <string name="hilton_hotel_name">فندق هيلتون</string>
-    <string name="hilton_hotel_desc">فندق فاخر بخدمات رائعة</string>
-    <string name="le_gourmet_name">لو غورميه</string>
-    <string name="le_gourmet_desc">تناول طعام فاخر مع المطبخ الفرنسي</string>
+    <!-- Tourist Sites -->
+    <string name="martyrs_memorial_name">نصب الشهداء</string>
+    <string name="martyrs_memorial_desc">نصب تذكاري بارز في الجزائر العاصمة يخلد حرب الاستقلال الجزائرية، ويوفر إطلالات رائعة على المدينة.</string>
+    <string name="notre_dame_name">نوتردام دافريك</string>
+    <string name="notre_dame_desc">كاتدرائية كاثوليكية تاريخية تطل على خليج الجزائر، معروفة بهندستها المذهلة وأجوائها الهادئة.</string>
+    <string name="casbah_name">قصبة الجزائر</string>
+    <string name="casbah_desc">موقع تراث عالمي لليونسكو، هذه القلعة القديمة تتميز بشوارع ضيقة وقصور عثمانية وتاريخ غني.</string>
+
+    <!-- Hotels -->
+    <string name="el_aurassi_name">فندق الأوراسي</string>
+    <string name="el_aurassi_desc">فندق فاخر من فئة 5 نجوم في الجزائر العاصمة مع إطلالات بانورامية ومرافق حديثة وقرب من المعالم الرئيسية.</string>
+    <string name="sofitel_name">سوفيتيل الجزائر</string>
+    <string name="sofitel_desc">فندق أنيق يمزج بين الأناقة الفرنسية والضيافة الجزائرية، مع مسبح وتناول طعام فاخر.</string>
+    <string name="marriott_name">ماريوت الجزائر</string>
+    <string name="marriott_desc">فندق معاصر يقدم غرفًا مريحة ومرافق أعمال وسهولة الوصول إلى معالم الجزائر العاصمة.</string>
+
+    <!-- Restaurants -->
+    <string name="le_tantra_name">لو تانترا</string>
+    <string name="le_tantra_desc">مطعم عصري في الجزائر العاصمة يقدم مزيجًا من المطبخ المتوسطي والجزائري في أجواء أنيقة.</string>
+    <string name="dar_el_qods_name">دار القدس</string>
+    <string name="dar_el_qods_desc">مكان مريح يقدم أطباقًا جزائرية تقليدية مثل الكسكس والطاجين، مع أجواء دافئة وأصيلة.</string>
+    <string name="el_djazair_name">مطعم الجزائر</string>
+    <string name="el_djazair_desc">تناول طعام فاخر يركز على المأكولات البحرية المحلية والتخصصات الجزائرية، يقع في قلب الجزائر العاصمة.</string>
 </resources>

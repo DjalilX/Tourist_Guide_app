@@ -1,7 +1,7 @@
 <resources>
     <!-- Existing strings -->
-    <string name="app_name">Tourist Guide</string>
-    <string name="app_description">Welcome to the Tourist Guide App.</string>
+    <string name="app_name">Algiers Tourist Guide</string>
+    <string name="app_description">Welcome to the Algiers Tourist Guide App, your companion for exploring the vibrant capital of Algeria. Discover iconic landmarks, cozy hotels, and delicious dining options in Algiers.</string>
     <string name="student_names">John Doe, Jane Smith, Alex Johnson</string>
     <string name="btnChangeLanguage">Change Language</string>
     <string name="category_tourist_sites">Tourist Sites</string>
@@ -12,10 +12,27 @@
     <string name="title_hotels">Hotels</string>
     <string name="title_restaurants">Restaurants</string>
     <!-- Place strings -->
-    <string name="eiffel_tower_name">Eiffel Tower</string>
-    <string name="eiffel_tower_desc">Famous landmark in Paris</string>
-    <string name="hilton_hotel_name">Hilton Hotel</string>
-    <string name="hilton_hotel_desc">Luxury hotel with great services</string>
-    <string name="le_gourmet_name">Le Gourmet</string>
-    <string name="le_gourmet_desc">Fine dining with French cuisine</string>
+    <!-- Tourist Sites -->
+    <string name="martyrs_memorial_name">Martyrs’ Memorial</string>
+    <string name="martyrs_memorial_desc">An iconic monument in Algiers commemorating the Algerian War of Independence, offering stunning views of the city.</string>
+    <string name="notre_dame_name">Notre Dame d’Afrique</string>
+    <string name="notre_dame_desc">A historic Catholic basilica overlooking the Bay of Algiers, known for its stunning architecture and serene atmosphere.</string>
+    <string name="casbah_name">Casbah of Algiers</string>
+    <string name="casbah_desc">A UNESCO World Heritage site, this ancient citadel features narrow streets, Ottoman palaces, and a rich history.</string>
+
+    <!-- Hotels -->
+    <string name="el_aurassi_name">El Aurassi Hotel</string>
+    <string name="el_aurassi_desc">A luxurious 5-star hotel in Algiers with panoramic views, modern amenities, and proximity to major landmarks.</string>
+    <string name="sofitel_name">Sofitel Algiers</string>
+    <string name="sofitel_desc">A stylish hotel blending French elegance with Algerian hospitality, featuring a pool and gourmet dining.</string>
+    <string name="marriott_name">Marriott Algiers</string>
+    <string name="marriott_desc">A contemporary hotel offering comfortable rooms, business facilities, and easy access to Algiers’ attractions.</string>
+
+    <!-- Restaurants -->
+    <string name="le_tantra_name">Le Tantra</string>
+    <string name="le_tantra_desc">A trendy restaurant in Algiers serving a fusion of Mediterranean and Algerian cuisine in a chic setting.</string>
+    <string name="dar_el_qods_name">Dar El Qods</string>
+    <string name="dar_el_qods_desc">A cozy spot offering traditional Algerian dishes like couscous and tagine, with a warm, authentic vibe.</string>
+    <string name="el_djazair_name">El Djazair Restaurant</string>
+    <string name="el_djazair_desc">Fine dining with a focus on local seafood and Algerian specialties, located in the heart of Algiers.</string>
 </resources>

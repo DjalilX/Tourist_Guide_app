@@ -47,6 +47,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.ViewHolder
                 intent.putExtra("place_image", place.getImage());
                 intent.putExtra("place_phone", place.getPhoneNumber());
                 intent.putExtra("place_website", place.getWebsite());
+                intent.putExtra("place_email", place.getEmail()); // Add email
                 context.startActivity(intent);
             });
         }

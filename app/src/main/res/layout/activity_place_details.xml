@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -21,7 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"/>
-
 
     <TextView
         android:id="@+id/textViewPlaceName"
@@ -38,17 +36,38 @@
         android:textSize="16sp"
         android:paddingTop="5dp"/>
 
-    <Button
-        android:id="@+id/btnCall"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Call"
-        android:paddingTop="10dp"/>
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="10dp">
 
-    <Button
-        android:id="@+id/btnWebsite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Visit Website"
-        android:paddingTop="5dp"/>
+        <Button
+            android:id="@+id/btnCall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnSms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SMS"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:layout_marginEnd="8dp"/>
+
+        <Button
+            android:id="@+id/btnWebsite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Visit Website"/>
+    </LinearLayout>
 </LinearLayout>
