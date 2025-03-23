@@ -38,7 +38,7 @@ public class PlacesListActivity extends BaseActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Enable back arrow
         }
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -96,6 +96,15 @@ public class PlacesListActivity extends BaseActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // Close activity and go back
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private List<Place> getPlacesByCategory(String category) {
         List<Place> list = new ArrayList<>();
         try {
@@ -130,7 +139,10 @@ public class PlacesListActivity extends BaseActivity {
                             getResources().getIdentifier(obj.getString("image"), "drawable", getPackageName()),
                             obj.getString("phone"),
                             obj.getString("website"),
-                            obj.getString("email")
+                            obj.getString("email"),
+                            (float) obj.getDouble("rating"),
+                            obj.getInt("reviewCount"),
+                            isFavorite
                     ));
                 }
             }

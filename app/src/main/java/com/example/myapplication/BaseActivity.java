@@ -21,8 +21,6 @@ public class BaseActivity extends AppCompatActivity {
         Configuration config = new Configuration();
         config.setLocale(locale);
         getResources().updateConfiguration(config, getResources().getDisplayMetrics());
-
-        // Save the new language preference
         getSharedPreferences("Settings", MODE_PRIVATE)
                 .edit()
                 .putString("lang", newLang)

@@ -14,6 +14,7 @@
     <string name="favorite_toggle_desc">Toggle favorite status</string>
     <string name="search">Search</string>
     <string name="no_places">No places available</string>
+    <string name="review_count">%d reviews</string> <!-- New -->
 
     <!-- Tourist Sites -->
     <string name="martyrs_memorial_name">Martyrs’ Memorial</string>

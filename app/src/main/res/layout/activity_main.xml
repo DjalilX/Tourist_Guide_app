@@ -4,15 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/darker_gray"> <!-- Explicitly set background -->
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:titleTextColor="@android:color/darker_gray"
+        app:titleTextColor="@android:color/white"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"/>
 
@@ -29,11 +28,11 @@
         android:layout_height="wrap_content"
         android:text="@string/app_description"
         android:textSize="18sp"
-        android:textColor="@android:color/black"
-        android:padding="16dp"
-        android:gravity="center"
-        android:background="@android:color/darker_gray"
-        android:elevation="2dp"/>
+        android:textColor="@android:color/white"
+    android:padding="16dp"
+    android:gravity="center"
+    android:background="#555555"
+    android:elevation="2dp"/>
 
     <TextView
         android:id="@+id/tvStudents"
@@ -41,9 +40,9 @@
         android:layout_height="wrap_content"
         android:text="@string/student_names"
         android:textSize="16sp"
-        android:textColor="@android:color/black"
-        android:gravity="center"
-        android:padding="10dp"/>
+        android:textColor="#CCCCCC"
+    android:gravity="center"
+    android:padding="10dp"/>
 
     <Button
         android:id="@+id/btnTouristSites"

@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
@@ -16,7 +18,8 @@ public class PlaceDetailsActivity extends BaseActivity {
     private static final String TAG = "PlaceDetailsActivity";
 
     private ImageView placeImage;
-    private TextView placeName, placeDescription;
+    private TextView placeName, placeDescription, reviewCount;
+    private RatingBar ratingBar;
     private Button btnCall, btnSms, btnEmail, btnWebsite, btnMap;
     private String phoneNumber, websiteUrl, email;
 
@@ -28,24 +31,29 @@ public class PlaceDetailsActivity extends BaseActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Enable back arrow
         }
 
         placeImage = findViewById(R.id.imageViewPlace);
         placeName = findViewById(R.id.textViewPlaceName);
         placeDescription = findViewById(R.id.textViewPlaceDescription);
+        ratingBar = findViewById(R.id.ratingBar);
+        reviewCount = findViewById(R.id.reviewCount);
         btnCall = findViewById(R.id.btnCall);
         btnSms = findViewById(R.id.btnSms);
         btnEmail = findViewById(R.id.btnEmail);
         btnWebsite = findViewById(R.id.btnWebsite);
         btnMap = findViewById(R.id.btnMap);
 
-        String name = getIntent().getStringExtra("place_name");
-        String description = getIntent().getStringExtra("place_description");
-        int imageRes = getIntent().getIntExtra("place_image", R.drawable.ic_launcher_foreground);
-        phoneNumber = getIntent().getStringExtra("place_phone");
-        websiteUrl = getIntent().getStringExtra("place_website");
-        email = getIntent().getStringExtra("place_email");
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("place_name");
+        String description = intent.getStringExtra("place_description");
+        int imageRes = intent.getIntExtra("place_image", R.drawable.ic_launcher_foreground);
+        phoneNumber = intent.getStringExtra("place_phone");
+        websiteUrl = intent.getStringExtra("place_website");
+        email = intent.getStringExtra("place_email");
+        float rating = intent.getFloatExtra("place_rating", 0.0f);
+        int reviewCountValue = intent.getIntExtra("place_review_count", 0);
 
         if (name == null || description == null) {
             Log.e(TAG, "Error: Missing place details");
@@ -57,6 +65,10 @@ public class PlaceDetailsActivity extends BaseActivity {
         placeName.setText(name);
         placeDescription.setText(description);
         placeImage.setImageResource(imageRes);
+        ratingBar.setRating(rating);
+        reviewCount.setText(getString(R.string.review_count, reviewCountValue));
+
+        setTitle(name);
 
         btnCall.setOnClickListener(v -> {
             if (phoneNumber != null && !phoneNumber.isEmpty()) {
@@ -112,5 +124,14 @@ public class PlaceDetailsActivity extends BaseActivity {
         });
 
         Log.d(TAG, "Current locale: " + getResources().getConfiguration().getLocales().get(0));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // Close activity and go back
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -14,6 +14,7 @@
     <string name="favorite_toggle_desc">تبديل حالة المفضلة</string>
     <string name="search">بحث</string>
     <string name="no_places">لا توجد أماكن متاحة</string>
+    <string name="review_count">%d تقييمات</string> <!-- New -->
 
     <!-- Tourist Sites -->
     <string name="martyrs_memorial_name">نصب الشهداء</string>
