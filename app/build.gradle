@@ -39,6 +39,7 @@ dependencies {
     implementation libs.material
     testImplementation libs.junit
     implementation libs.androidx.viewpager2
+    implementation libs.material.v1110
 
     androidTestImplementation libs.androidx.junit.v115
     androidTestImplementation libs.androidx.espresso.core.v351

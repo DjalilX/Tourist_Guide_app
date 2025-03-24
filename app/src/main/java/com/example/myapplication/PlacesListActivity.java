@@ -16,11 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.adapters.PlacesAdapter;
 import com.example.myapplication.models.Place;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -40,7 +41,29 @@ public class PlacesListActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
+               // Setup Bottom Navigation
+        BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
+        bottomNavigation.setOnItemSelectedListener(item -> {
+            String category = null;
+            int itemId = item.getItemId();
+            if (itemId == R.id.nav_hotels) {
+                category = "Hotels";
+            } else if (itemId == R.id.nav_restaurants) {
+                category = "Restaurants";
+            } else if (itemId == R.id.nav_tourist_sites) {
+                category = "Tourist Sites";
+            } else if (itemId == R.id.nav_favorites) {
+                category = "Favorites";
+            }
+            if (category != null) {
+                Intent intent = new Intent(this, PlacesListActivity.class);
+                intent.putExtra("category", category);
+                startActivity(intent);
+                finish(); // Optional: Close current instance to avoid stacking
+                return true;
+            }
+            return false;
+        });
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         ProgressBar progressBar = findViewById(R.id.progressBar);
         TextView tvEmpty = findViewById(R.id.tvEmpty);
@@ -96,8 +119,12 @@ public class PlacesListActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
             finish();
+            return true;
+        } else if (itemId == R.id.action_language) {
+            super.toggleLanguage();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -130,7 +157,6 @@ public class PlacesListActivity extends BaseActivity {
                     String name = nameResId != 0 ? getString(nameResId) : nameKey;
                     String desc = descResId != 0 ? getString(descResId) : descKey;
 
-                    // Handle multiple images or single image
                     List<Integer> imageResIds = new ArrayList<>();
                     if (obj.has("images")) {
                         JSONArray imagesArray = obj.getJSONArray("images");
@@ -143,7 +169,7 @@ public class PlacesListActivity extends BaseActivity {
                         if (imageResId != 0) imageResIds.add(imageResId);
                     }
                     if (imageResIds.isEmpty()) {
-                        imageResIds.add(R.drawable.ic_launcher_foreground); // Fallback
+                        imageResIds.add(R.drawable.ic_launcher_foreground);
                     }
 
                     list.add(new Place(

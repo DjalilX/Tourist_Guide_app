@@ -1,7 +1,7 @@
 [
   {
-    "id": "1",
-    "name": "Martyrs Memorial",
+    "id": "martyrs_memorial",
+    "name": "martyrs_memorial_name",
     "desc": "martyrs_memorial_desc",
     "images": [
       "martyrs_memorial2",

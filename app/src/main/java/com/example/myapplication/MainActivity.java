@@ -1,60 +1,102 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import java.util.HashSet;
-import java.util.Set;
+import android.os.Handler;
+import android.os.Looper;
+import android.view.Menu;
+import android.view.MenuItem;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.example.myapplication.adapters.PhotoAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
-    private static final String TAG = "MainActivity";
+    private RecyclerView descriptionCarousel;
+    private Handler handler;
+    private Runnable autoScrollRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView tvDescription = findViewById(R.id.tvDescription);
-        TextView tvStudents = findViewById(R.id.tvStudents);
-        Button btnChangeLanguage = findViewById(R.id.btnChangeLanguage);
-        Button btnTouristSites = findViewById(R.id.btnTouristSites);
-        Button btnHotels = findViewById(R.id.btnHotels);
-        Button btnRestaurants = findViewById(R.id.btnRestaurants);
-        Button btnFavorites = findViewById(R.id.btnFavorites);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        setTitle(R.string.app_name);
 
-        tvDescription.setText(R.string.app_description);
-        tvStudents.setText(R.string.student_names);
-
-        btnChangeLanguage.setOnClickListener(v -> {
-            toggleLanguage();
-            recreate();
+        // Setup Bottom Navigation
+        BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
+        bottomNavigation.setOnItemSelectedListener(item -> {
+            String category = null;
+            int itemId = item.getItemId();
+            if (itemId == R.id.nav_hotels) {
+                category = "Hotels";
+            } else if (itemId == R.id.nav_restaurants) {
+                category = "Restaurants";
+            } else if (itemId == R.id.nav_tourist_sites) {
+                category = "Tourist Sites";
+            } else if (itemId == R.id.nav_favorites) {
+                category = "Favorites";
+            }
+            if (category != null) {
+                Intent intent = new Intent(MainActivity.this, PlacesListActivity.class);
+                intent.putExtra("category", category);
+                startActivity(intent);
+                return true;
+            }
+            return false;
         });
 
-        btnTouristSites.setOnClickListener(v -> startPlacesActivity("Tourist Sites"));
-        btnHotels.setOnClickListener(v -> startPlacesActivity("Hotels"));
-        btnRestaurants.setOnClickListener(v -> startPlacesActivity("Restaurants"));
-        btnFavorites.setOnClickListener(v -> startPlacesActivity("Favorites"));
+        // Setup Description Carousel
+        descriptionCarousel = findViewById(R.id.descriptionCarousel);
+        descriptionCarousel.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        List<Integer> carouselImages = Arrays.asList(
+                R.drawable.martyrs_memorial,
+                R.drawable.casbah,
+                R.drawable.sofitel,
+                R.drawable.el_djazair,
+                R.drawable.el_aurassi
+        );
+        PhotoAdapter carouselAdapter = new PhotoAdapter(this, carouselImages, position -> {}, false);
+        descriptionCarousel.setAdapter(carouselAdapter);
 
-        Log.d(TAG, "MainActivity created with locale: " + getResources().getConfiguration().getLocales().get(0));
-    }
-
-    private void startPlacesActivity(String category) {
-        Intent intent = new Intent(this, PlacesListActivity.class);
-        intent.putExtra("category", category);
-        startActivity(intent);
+        // Auto-scroll carousel
+        handler = new Handler(Looper.getMainLooper());
+        autoScrollRunnable = new Runnable() {
+            int currentPosition = 0;
+            @Override
+            public void run() {
+                currentPosition = (currentPosition + 1) % carouselImages.size();
+                descriptionCarousel.smoothScrollToPosition(currentPosition);
+                handler.postDelayed(this, 3000);
+            }
+        };
+        handler.postDelayed(autoScrollRunnable, 3000);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        SharedPreferences prefs = getSharedPreferences("Favorites", MODE_PRIVATE);
-        Set<String> favorites = prefs.getStringSet("favorite_places", new HashSet<>());
-        Button btnFavorites = findViewById(R.id.btnFavorites);
-        btnFavorites.setEnabled(!favorites.isEmpty());
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_language) {
+            super.toggleLanguage();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(autoScrollRunnable);
     }
 }

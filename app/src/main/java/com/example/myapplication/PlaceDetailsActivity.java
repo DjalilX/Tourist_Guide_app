@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 import com.example.myapplication.adapters.PhotoAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +47,28 @@ public class PlaceDetailsActivity extends BaseActivity implements PhotoAdapter.O
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+            // Setup Bottom Navigation
+        BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
+        bottomNavigation.setOnItemSelectedListener(item -> {
+            String category = null;
+            int itemId = item.getItemId();
+            if (itemId == R.id.nav_hotels) {
+                category = "Hotels";
+            } else if (itemId == R.id.nav_restaurants) {
+                category = "Restaurants";
+            } else if (itemId == R.id.nav_tourist_sites) {
+                category = "Tourist Sites";
+            } else if (itemId == R.id.nav_favorites) {
+                category = "Favorites";
+            }
+            if (category != null) {
+                Intent intent = new Intent(this, PlacesListActivity.class);
+                intent.putExtra("category", category);
+                startActivity(intent);
+                return true;
+            }
+            return false;
+        });
 
         placeName = findViewById(R.id.textViewPlaceName);
         placeDescription = findViewById(R.id.textViewPlaceDescription);
@@ -87,13 +112,11 @@ public class PlaceDetailsActivity extends BaseActivity implements PhotoAdapter.O
         reviewCount.setText(getString(R.string.review_count, reviewCountValue));
         setTitle(name);
 
-        // Setup Photo Gallery (thumbnails)
         photoGallery.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        PhotoAdapter photoAdapter = new PhotoAdapter(this, imageResIds, this, false); // false for thumbnails
+        PhotoAdapter photoAdapter = new PhotoAdapter(this, imageResIds, this, false);
         photoGallery.setAdapter(photoAdapter);
         setupDots(imageResIds.size());
 
-        // Button Listeners
         btnCall.setOnClickListener(v -> {
             if (phoneNumber != null && !phoneNumber.isEmpty()) {
                 startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber)));
@@ -142,6 +165,27 @@ public class PlaceDetailsActivity extends BaseActivity implements PhotoAdapter.O
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        searchItem.setVisible(false);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) {
+            finish();
+            return true;
+        } else if (itemId == R.id.action_language) {
+            super.toggleLanguage();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setupDots(int count) {
         dotsContainer.removeAllViews();
         for (int i = 0; i < count; i++) {
@@ -181,20 +225,11 @@ public class PlaceDetailsActivity extends BaseActivity implements PhotoAdapter.O
 
         ViewPager2 viewPager = dialog.findViewById(R.id.viewPager);
         ImageView closeButton = dialog.findViewById(R.id.closeButton);
-        PhotoAdapter fullPhotoAdapter = new PhotoAdapter(this, imageResIds, pos -> {}, true); // true for full-screen
+        PhotoAdapter fullPhotoAdapter = new PhotoAdapter(this, imageResIds, pos -> {}, true);
         viewPager.setAdapter(fullPhotoAdapter);
         viewPager.setCurrentItem(position, false);
 
         closeButton.setOnClickListener(v -> dialog.dismiss());
         dialog.show();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
