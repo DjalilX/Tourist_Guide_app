@@ -20,6 +20,7 @@ material = "1.12.0"
 materialVersion = "1.9.0"
 recyclerview = "1.4.0"
 recyclerviewVersion = "1.2.1"
+viewpager2 = "1.1.0"
 
 [libraries]
 androidx-appcompat-v161 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
@@ -31,6 +32,7 @@ androidx-junit-v115 = { module = "androidx.test.ext:junit", version.ref = "andro
 androidx-lifecycle-runtime-ktx-v251 = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtxVersion" }
 androidx-recyclerview-v121 = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerviewVersion" }
 androidx-recyclerview-v132 = { module = "androidx.recyclerview:recyclerview", version.ref = "androidxRecyclerview" }
+androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }

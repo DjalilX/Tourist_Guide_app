@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,7 +38,7 @@ public class PlacesListActivity extends BaseActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true); // Enable back arrow
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -48,9 +48,7 @@ public class PlacesListActivity extends BaseActivity {
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_fade_in));
 
         String category = getIntent().getStringExtra("category");
-        if (category == null) {
-            category = "Tourist Sites";
-        }
+        if (category == null) category = "Tourist Sites";
         Log.d(TAG, "Received category: " + category);
 
         setTitle(getString(category.equals("Tourist Sites") ? R.string.title_tourist_sites :
@@ -99,7 +97,7 @@ public class PlacesListActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            finish(); // Close activity and go back
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -132,11 +130,27 @@ public class PlacesListActivity extends BaseActivity {
                     String name = nameResId != 0 ? getString(nameResId) : nameKey;
                     String desc = descResId != 0 ? getString(descResId) : descKey;
 
+                    // Handle multiple images or single image
+                    List<Integer> imageResIds = new ArrayList<>();
+                    if (obj.has("images")) {
+                        JSONArray imagesArray = obj.getJSONArray("images");
+                        for (int j = 0; j < imagesArray.length(); j++) {
+                            int imageResId = getResources().getIdentifier(imagesArray.getString(j), "drawable", getPackageName());
+                            if (imageResId != 0) imageResIds.add(imageResId);
+                        }
+                    } else if (obj.has("image")) {
+                        int imageResId = getResources().getIdentifier(obj.getString("image"), "drawable", getPackageName());
+                        if (imageResId != 0) imageResIds.add(imageResId);
+                    }
+                    if (imageResIds.isEmpty()) {
+                        imageResIds.add(R.drawable.ic_launcher_foreground); // Fallback
+                    }
+
                     list.add(new Place(
                             obj.getString("id"),
                             name,
                             desc,
-                            getResources().getIdentifier(obj.getString("image"), "drawable", getPackageName()),
+                            imageResIds,
                             obj.getString("phone"),
                             obj.getString("website"),
                             obj.getString("email"),

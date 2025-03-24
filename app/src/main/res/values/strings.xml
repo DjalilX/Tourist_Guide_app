@@ -39,4 +39,7 @@
     <string name="dar_el_qods_desc">A cozy spot offering traditional Algerian dishes like couscous and tagine, with a warm, authentic vibe.</string>
     <string name="el_djazair_name">El Djazair Restaurant</string>
     <string name="el_djazair_desc">Fine dining with a focus on local seafood and Algerian specialties, located in the heart of Algiers.</string>
+    <string name="photo_thumbnail_desc">Thumbnail photo of place</string>
+    <string name="close_gallery_desc">Close photo gallery</string>
+    <string name="full_photo_desc">Full-screen photo of place</string>
 </resources>

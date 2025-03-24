@@ -38,6 +38,7 @@ dependencies {
     implementation libs.androidx.cardview
     implementation libs.material
     testImplementation libs.junit
+    implementation libs.androidx.viewpager2
 
     androidTestImplementation libs.androidx.junit.v115
     androidTestImplementation libs.androidx.espresso.core.v351

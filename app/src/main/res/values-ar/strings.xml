@@ -39,4 +39,7 @@
     <string name="dar_el_qods_desc">مكان مريح يقدم أطباقًا جزائرية تقليدية مثل الكسكس والطاجين، مع أجواء دافئة وأصيلة.</string>
     <string name="el_djazair_name">مطعم الجزائر</string>
     <string name="el_djazair_desc">تناول طعام فاخر يركز على المأكولات البحرية المحلية والتخصصات الجزائرية، يقع في قلب الجزائر العاصمة.</string>
+    <string name="photo_thumbnail_desc">صورة مصغرة للمكان</string>
+    <string name="close_gallery_desc">إغلاق معرض الصور</string>
+    <string name="full_photo_desc">صورة كاملة للمكان</string>
 </resources>

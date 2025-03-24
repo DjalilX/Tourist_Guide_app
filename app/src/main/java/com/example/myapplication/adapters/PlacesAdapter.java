@@ -11,7 +11,6 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.PlaceDetailsActivity;
 import com.example.myapplication.R;
@@ -25,7 +24,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.PlaceViewH
 
     private Context context;
     private List<Place> places;
-    private List<Place> placesFull; // For filtering
+    private List<Place> placesFull;
     private SharedPreferences prefs;
 
     public PlacesAdapter(Context context, List<Place> places) {
@@ -35,20 +34,20 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.PlaceViewH
         this.prefs = context.getSharedPreferences("Favorites", Context.MODE_PRIVATE);
     }
 
-    @NonNull
     @Override
-    public PlaceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PlaceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.list_item_place, parent, false);
         return new PlaceViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlaceViewHolder holder, int position) {
+    public void onBindViewHolder(PlaceViewHolder holder, int position) {
         Place place = places.get(position);
 
         holder.placeName.setText(place.getName());
         holder.placeDescription.setText(place.getDescription());
-        holder.placeImage.setImageResource(place.getImageResId());
+        // Use the first image for the list item
+        holder.placeImage.setImageResource(place.getImageResIds().get(0));
         holder.ratingBar.setRating(place.getRating());
         holder.reviewCount.setText(context.getString(R.string.review_count, place.getReviewCount()));
         holder.favoriteIcon.setImageResource(place.isFavorite() ? R.drawable.ic_star_filled : R.drawable.ic_star_outline);
@@ -59,11 +58,8 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.PlaceViewH
             holder.favoriteIcon.setImageResource(isFavorite ? R.drawable.ic_star_filled : R.drawable.ic_star_outline);
 
             Set<String> favorites = new HashSet<>(prefs.getStringSet("favorite_places", new HashSet<>()));
-            if (isFavorite) {
-                favorites.add(place.getId());
-            } else {
-                favorites.remove(place.getId());
-            }
+            if (isFavorite) favorites.add(place.getId());
+            else favorites.remove(place.getId());
             prefs.edit().putStringSet("favorite_places", favorites).apply();
         });
 
@@ -71,7 +67,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.PlaceViewH
             Intent intent = new Intent(context, PlaceDetailsActivity.class);
             intent.putExtra("place_name", place.getName());
             intent.putExtra("place_description", place.getDescription());
-            intent.putExtra("place_image", place.getImageResId());
+            intent.putIntegerArrayListExtra("place_images", new ArrayList<>(place.getImageResIds()));
             intent.putExtra("place_phone", place.getPhone());
             intent.putExtra("place_website", place.getWebsite());
             intent.putExtra("place_email", place.getEmail());
@@ -122,7 +118,7 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.PlaceViewH
         TextView placeName, placeDescription, reviewCount;
         RatingBar ratingBar;
 
-        PlaceViewHolder(@NonNull View itemView) {
+        PlaceViewHolder(View itemView) {
             super(itemView);
             placeImage = itemView.findViewById(R.id.placeImage);
             placeName = itemView.findViewById(R.id.placeName);
