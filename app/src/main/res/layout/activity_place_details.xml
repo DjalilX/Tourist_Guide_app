@@ -98,39 +98,48 @@
             android:gravity="center"
             android:layout_marginTop="10dp">
 
-            <Button
+
+            <ImageButton
                 android:id="@+id/btnCall"
-                android:layout_width="wrap_content"
+                android:layout_width="71dp"
+                android:layout_marginStart="5dp"
                 android:layout_height="wrap_content"
-                android:text="Call"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Bouton Call"
+                android:src="@drawable/ic_call" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnSms"
-                android:layout_width="wrap_content"
+                android:layout_width="71dp"
                 android:layout_height="wrap_content"
-                android:text="SMS"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Bouton Sms"
+                android:src="@drawable/ic_sms" />
 
-            <Button
+
+            <ImageButton
                 android:id="@+id/btnEmail"
-                android:layout_width="wrap_content"
+                android:layout_width="71dp"
                 android:layout_height="wrap_content"
-                android:text="Email"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Bouton Email"
+                android:src="@drawable/ic_email" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnWebsite"
-                android:layout_width="wrap_content"
+                android:layout_width="71dp"
                 android:layout_height="wrap_content"
-                android:text="Visit Website"
-                android:layout_marginEnd="8dp"/>
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Bouton website"
+                android:src="@drawable/ic_website" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btnMap"
-                android:layout_width="wrap_content"
+                android:layout_width="71dp"
                 android:layout_height="wrap_content"
-                android:text="Map"/>
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Bouton Map"
+                android:src="@drawable/ic_map" />
         </LinearLayout>
     </LinearLayout>
 
