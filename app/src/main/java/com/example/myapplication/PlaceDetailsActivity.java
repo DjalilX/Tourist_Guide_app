@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -31,7 +32,7 @@ public class PlaceDetailsActivity extends BaseActivity implements PhotoAdapter.O
     private static final String TAG = "PlaceDetailsActivity";
     private TextView placeName, placeDescription, reviewCount;
     private RatingBar ratingBar;
-    private Button btnCall, btnSms, btnEmail, btnWebsite, btnMap;
+    private ImageButton btnCall, btnSms, btnEmail, btnWebsite, btnMap;
     private RecyclerView photoGallery;
     private LinearLayout dotsContainer;
     private String phoneNumber, websiteUrl, email;
