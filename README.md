@@ -1,4 +1,4 @@
-git pull origin main# Tourist Guide App
+# Tourist Guide App
 
 ## 📌 Overview
 Tourist Guide is an Android mobile application that provides details about tourist sites, hotels, and restaurants. Users can browse places, view details, make calls, and visit websites. The app supports English and Arabic languages with a dynamic language switcher.
@@ -71,4 +71,3 @@ This project is **open-source** and available under the [MIT License](LICENSE).
 
 ---
 💡 **Developed by**: DjalilX & Contributors
-
