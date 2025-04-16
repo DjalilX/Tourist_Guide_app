@@ -1,1 +1,26 @@
-/build
+# Android Studio
+.idea/
+*.iml
+
+# Ignore tests only
+src/androidTest/
+src/test/
+
+# Gradle
+.gradle/
+build/
+.cxx/
+!gradle/wrapper/gradle-wrapper.jar
+!gradlew
+!gradlew.bat
+
+# Local configuration
+local.properties
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Logs & temp files
+*.log
+*.tmp

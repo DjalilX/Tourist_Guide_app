@@ -4,61 +4,74 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.R;
+import com.google.android.material.imageview.ShapeableImageView;
 import java.util.List;
 
-public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder> {
+public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> {
     private Context context;
-    private List<Integer> imageResIds;
+    private List<Integer> images;
     private OnPhotoClickListener listener;
-    private boolean isFullScreen; // New flag to determine layout
+    private boolean isFullScreen;
+    private boolean isHomePage;
 
     public interface OnPhotoClickListener {
         void onPhotoClick(int position);
     }
 
-    public PhotoAdapter(Context context, List<Integer> imageResIds, OnPhotoClickListener listener, boolean isFullScreen) {
+    public PhotoAdapter(Context context, List<Integer> images, OnPhotoClickListener listener, boolean isFullScreen, boolean isHomePage) {
         this.context = context;
-        this.imageResIds = imageResIds;
+        this.images = images;
         this.listener = listener;
         this.isFullScreen = isFullScreen;
-    }
-
-    @NonNull
-    @Override
-    public PhotoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        int layout = isFullScreen ? R.layout.item_full_photo : R.layout.item_photo;
-        View view = LayoutInflater.from(context).inflate(layout, parent, false);
-        return new PhotoViewHolder(view);
+        this.isHomePage = isHomePage;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PhotoViewHolder holder, int position) {
-        int imageResId = imageResIds.get(position);
-        holder.imageView.setImageResource(imageResId);
-        if (!isFullScreen) { // Only set click listener for thumbnails
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        int layoutRes = isFullScreen ? R.layout.item_full_screen : R.layout.item_photo;
+        View view = LayoutInflater.from(context).inflate(layoutRes, parent, false);
+        return new ViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        int imageRes = images.get(position % images.size());
+        holder.imageView.setImageResource(imageRes);
+
+        // Apply right-to-left slide for homepage carousel
+        if (!isFullScreen && isHomePage) {
+            holder.imageView.setAlpha(0f);
+            holder.imageView.setTranslationX(100f);
+            holder.imageView.animate()
+                    .alpha(1f)
+                    .translationX(0f)
+                    .setDuration(600)
+                    .withEndAction(() -> {
+                        holder.imageView.setAlpha(1f);
+                        holder.imageView.setTranslationX(0f);
+                    })
+                    .start();
+        }
+
+        // Set click listener for non-fullscreen, non-homepage views (PlaceDetailsActivity)
+        if (!isFullScreen && !isHomePage) {
             holder.itemView.setOnClickListener(v -> listener.onPhotoClick(position));
         }
     }
 
     @Override
     public int getItemCount() {
-        return imageResIds.size();
+        return images.size();
     }
 
-    static class PhotoViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        ShapeableImageView imageView;
 
-        PhotoViewHolder(@NonNull View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(isFullScreenView(itemView) ? R.id.fullPhoto : R.id.thumbnail);
-        }
-
-        private static boolean isFullScreenView(View view) {
-            return view.getId() == R.id.fullPhoto;
+            imageView = itemView.findViewById(R.id.thumbnail);
         }
     }
 }

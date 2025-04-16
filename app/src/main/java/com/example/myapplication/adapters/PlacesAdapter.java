@@ -3,6 +3,7 @@ package com.example.myapplication.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import java.util.Set;
 
 public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.PlaceViewHolder> implements Filterable {
 
+    private static final String TAG = "PlacesAdapter";
     private Context context;
     private List<Place> places;
     private List<Place> placesFull;
@@ -46,24 +48,14 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.PlaceViewH
 
         holder.placeName.setText(place.getName());
         holder.placeDescription.setText(place.getDescription());
-        // Use the first image for the list item
         holder.placeImage.setImageResource(place.getImageResIds().get(0));
         holder.ratingBar.setRating(place.getRating());
         holder.reviewCount.setText(context.getString(R.string.review_count, place.getReviewCount()));
         holder.favoriteIcon.setImageResource(place.isFavorite() ? R.drawable.ic_star_filled : R.drawable.ic_star_outline);
 
-        holder.favoriteIcon.setOnClickListener(v -> {
-            boolean isFavorite = !place.isFavorite();
-            place.setFavorite(isFavorite);
-            holder.favoriteIcon.setImageResource(isFavorite ? R.drawable.ic_star_filled : R.drawable.ic_star_outline);
-
-            Set<String> favorites = new HashSet<>(prefs.getStringSet("favorite_places", new HashSet<>()));
-            if (isFavorite) favorites.add(place.getId());
-            else favorites.remove(place.getId());
-            prefs.edit().putStringSet("favorite_places", favorites).apply();
-        });
-
+        // Favorite click handled in XML (android:onClick)
         holder.itemView.setOnClickListener(v -> {
+            Log.d(TAG, "Item clicked: " + place.getName());
             Intent intent = new Intent(context, PlaceDetailsActivity.class);
             intent.putExtra("place_name", place.getName());
             intent.putExtra("place_description", place.getDescription());
@@ -73,7 +65,13 @@ public class PlacesAdapter extends RecyclerView.Adapter<PlacesAdapter.PlaceViewH
             intent.putExtra("place_email", place.getEmail());
             intent.putExtra("place_rating", place.getRating());
             intent.putExtra("place_review_count", place.getReviewCount());
-            context.startActivity(intent);
+            intent.putExtra("category", place.getCategory());
+            try {
+                context.startActivity(intent);
+                Log.d(TAG, "Started PlaceDetailsActivity for: " + place.getName());
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to start PlaceDetailsActivity: " + e.getMessage());
+            }
         });
     }
 

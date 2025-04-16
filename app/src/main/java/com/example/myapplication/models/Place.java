@@ -14,21 +14,25 @@ public class Place implements Serializable {
     private float rating;
     private int reviewCount;
     private boolean isFavorite;
+    private String category;
 
-    public Place(String id, String name, String description, List<Integer> imageResIds, String phone,
-                 String website, String email, float rating, int reviewCount, boolean isFavorite) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.imageResIds = imageResIds;
-        this.phone = phone;
-        this.website = website;
-        this.email = email;
-        this.rating = rating;
-        this.reviewCount = reviewCount;
-        this.isFavorite = isFavorite;
-    }
 
+
+        public Place(String id, String name, String description, List<Integer> imageResIds,
+                     String phone, String website, String email, float rating,
+                     int reviewCount, boolean isFavorite, String category) {
+            this.id = id;
+            this.name = name;
+            this.description = description;
+            this.imageResIds = imageResIds;
+            this.phone = phone;
+            this.website = website;
+            this.email = email;
+            this.rating = rating;
+            this.reviewCount = reviewCount;
+            this.isFavorite = isFavorite;
+            this.category = category;
+        }
     public String getId() { return id; }
     public String getName() { return name; }
     public String getDescription() { return description; }
@@ -40,4 +44,5 @@ public class Place implements Serializable {
     public int getReviewCount() { return reviewCount; }
     public boolean isFavorite() { return isFavorite; }
     public void setFavorite(boolean isFavorite) { this.isFavorite = isFavorite; }
+    public String getCategory() { return category; }
 }

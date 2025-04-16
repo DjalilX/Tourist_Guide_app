@@ -13,7 +13,7 @@ public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        applyLanguage(); // Apply saved language before layout inflation
+        applyLanguage();
         super.onCreate(savedInstanceState);
     }
 
@@ -22,17 +22,14 @@ public class BaseActivity extends AppCompatActivity {
         String currentLang = prefs.getString(KEY_LANGUAGE, "en");
         String newLang = currentLang.equals("en") ? "ar" : "en";
 
-        // Save new language
         prefs.edit().putString(KEY_LANGUAGE, newLang).apply();
 
-        // Update locale
         Locale locale = new Locale(newLang);
         Locale.setDefault(locale);
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.setLocale(locale);
         getResources().updateConfiguration(config, getResources().getDisplayMetrics());
 
-        // Restart MainActivity to refresh the app
         Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
@@ -41,7 +38,7 @@ public class BaseActivity extends AppCompatActivity {
 
     private void applyLanguage() {
         SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-        String language = prefs.getString(KEY_LANGUAGE, "en"); // Default to English
+        String language = prefs.getString(KEY_LANGUAGE, "en");
         Locale locale = new Locale(language);
         Locale.setDefault(locale);
         android.content.res.Configuration config = new android.content.res.Configuration();

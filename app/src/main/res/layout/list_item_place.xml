@@ -15,13 +15,14 @@
         android:orientation="horizontal"
         android:padding="10dp">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/placeImage"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_foreground"
-            android:contentDescription="@string/place_image_desc"/>
+            android:contentDescription="@string/place_image_desc"
+            app:shapeAppearanceOverlay="@style/RoundedCornerImage" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -45,6 +46,9 @@
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
                 android:textColor="#CCCCCC"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:text="Description"/>
 
             <LinearLayout
@@ -64,7 +68,7 @@
                     style="?android:attr/ratingBarStyleSmall"
                     android:scaleX="1.0"
                     android:scaleY="1.0"
-                    android:layout_marginStart="0dp"/>  <!-- Aligned with text, parent padding handles spacing -->
+                    android:layout_marginStart="0dp"/>
 
                 <TextView
                     android:id="@+id/reviewCount"
@@ -81,6 +85,9 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_star_outline"
-            android:contentDescription="@string/favorite_toggle_desc"/>
+            android:contentDescription="@string/favorite_toggle_desc"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onFavoriteClick"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

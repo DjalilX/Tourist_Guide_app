@@ -6,11 +6,14 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.adapters.PhotoAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.imageview.ShapeableImageView;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,11 +32,19 @@ public class MainActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         setTitle(R.string.app_name);
 
+        // Set header image
+        ShapeableImageView headerImage = findViewById(R.id.headerImage);
+        headerImage.setImageResource(R.drawable.algiers_header);
+
         // Setup Bottom Navigation
         BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
+        bottomNavigation.setSelectedItemId(R.id.nav_home);
         bottomNavigation.setOnItemSelectedListener(item -> {
-            String category = null;
             int itemId = item.getItemId();
+            if (itemId == R.id.nav_home) {
+                return true;
+            }
+            String category = null;
             if (itemId == R.id.nav_hotels) {
                 category = "Hotels";
             } else if (itemId == R.id.nav_restaurants) {
@@ -44,8 +55,9 @@ public class MainActivity extends BaseActivity {
                 category = "Favorites";
             }
             if (category != null) {
-                Intent intent = new Intent(MainActivity.this, PlacesListActivity.class);
+                Intent intent = new Intent(this, PlacesListActivity.class);
                 intent.putExtra("category", category);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 return true;
             }
@@ -58,11 +70,15 @@ public class MainActivity extends BaseActivity {
         List<Integer> carouselImages = Arrays.asList(
                 R.drawable.martyrs_memorial,
                 R.drawable.casbah,
+                R.drawable.martyrs_memorial2,
                 R.drawable.sofitel,
+                R.drawable.martyrs_memorial3,
                 R.drawable.el_djazair,
+                R.drawable.martyrs_memorial4,
                 R.drawable.el_aurassi
         );
-        PhotoAdapter carouselAdapter = new PhotoAdapter(this, carouselImages, position -> {}, false);
+
+        PhotoAdapter carouselAdapter = new PhotoAdapter(this, carouselImages, position -> {}, false, true);
         descriptionCarousel.setAdapter(carouselAdapter);
 
         // Auto-scroll carousel
@@ -80,14 +96,37 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
+        bottomNavigation.setSelectedItemId(R.id.nav_home);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        if (searchItem != null) {
+            SearchView searchView = (SearchView) searchItem.getActionView();
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    return false;
+                }
+            });
+        }
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_language) {
+        int itemId = item.getItemId();
+        if (itemId == R.id.action_language) {
             super.toggleLanguage();
             return true;
         }
@@ -97,6 +136,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        handler.removeCallbacks(autoScrollRunnable);
+        if (handler != null && autoScrollRunnable != null) {
+            handler.removeCallbacks(autoScrollRunnable);
+        }
     }
 }

@@ -30,6 +30,8 @@ public class PlacesListActivity extends BaseActivity {
 
     private static final String TAG = "PlacesListActivity";
     private PlacesAdapter adapter;
+    private String category;
+    private List<Place> places;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,45 +43,57 @@ public class PlacesListActivity extends BaseActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-               // Setup Bottom Navigation
+
+        // Initialize category
+        category = getIntent().getStringExtra("category");
+        if (category == null) category = "Tourist Sites";
+
+        // Setup Bottom Navigation
         BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
+        bottomNavigation.setSelectedItemId(getMenuItemIdForCategory(category));
         bottomNavigation.setOnItemSelectedListener(item -> {
-            String category = null;
             int itemId = item.getItemId();
-            if (itemId == R.id.nav_hotels) {
-                category = "Hotels";
-            } else if (itemId == R.id.nav_restaurants) {
-                category = "Restaurants";
-            } else if (itemId == R.id.nav_tourist_sites) {
-                category = "Tourist Sites";
-            } else if (itemId == R.id.nav_favorites) {
-                category = "Favorites";
-            }
-            if (category != null) {
-                Intent intent = new Intent(this, PlacesListActivity.class);
-                intent.putExtra("category", category);
+            Log.d(TAG, "Selected item: " + itemId + ", Current category: " + category);
+            if (itemId == R.id.nav_home) {
+                Log.d(TAG, "Navigating to MainActivity");
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
-                finish(); // Optional: Close current instance to avoid stacking
+                finish();
                 return true;
             }
+            String newCategory = null;
+            if (itemId == R.id.nav_hotels) newCategory = "Hotels";
+            else if (itemId == R.id.nav_restaurants) newCategory = "Restaurants";
+            else if (itemId == R.id.nav_tourist_sites) newCategory = "Tourist Sites";
+            else if (itemId == R.id.nav_favorites) newCategory = "Favorites";
+            if (newCategory != null && !newCategory.equals(category)) {
+                Log.d(TAG, "Navigating to PlacesListActivity with category: " + newCategory);
+                Intent intent = new Intent(this, PlacesListActivity.class);
+                intent.putExtra("category", newCategory);
+                startActivity(intent);
+                finish();
+                return true;
+            }
+            Log.d(TAG, "Same or invalid category selected");
             return false;
         });
+
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         ProgressBar progressBar = findViewById(R.id.progressBar);
         TextView tvEmpty = findViewById(R.id.tvEmpty);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, R.anim.layout_fade_in));
 
-        String category = getIntent().getStringExtra("category");
-        if (category == null) category = "Tourist Sites";
         Log.d(TAG, "Received category: " + category);
 
         setTitle(getString(category.equals("Tourist Sites") ? R.string.title_tourist_sites :
                 category.equals("Hotels") ? R.string.title_hotels :
-                        category.equals("Restaurants") ? R.string.title_restaurants : R.string.category_favorites));
+                        category.equals("Restaurants") ? R.string.title_restaurants :
+                                R.string.category_favorites));
 
         progressBar.setVisibility(View.VISIBLE);
-        List<Place> places = getPlacesByCategory(category);
+        places = getPlacesByCategory(category);
 
         if (places == null || places.isEmpty()) {
             Log.e(TAG, "Error: No places found for category: " + category);
@@ -95,6 +109,24 @@ public class PlacesListActivity extends BaseActivity {
         }
 
         Log.d(TAG, "Current locale: " + getResources().getConfiguration().getLocales().get(0));
+    }
+
+    public void onFavoriteClick(View view) {
+        int position = ((RecyclerView) findViewById(R.id.recyclerView))
+                .getChildAdapterPosition((View) view.getParent().getParent());
+        if (position != RecyclerView.NO_POSITION) {
+            Place place = places.get(position);
+            boolean isFavorite = !place.isFavorite();
+            place.setFavorite(isFavorite);
+
+            SharedPreferences prefs = getSharedPreferences("Favorites", MODE_PRIVATE);
+            Set<String> favorites = new HashSet<>(prefs.getStringSet("favorite_places", new HashSet<>()));
+            if (isFavorite) favorites.add(place.getId());
+            else favorites.remove(place.getId());
+            prefs.edit().putStringSet("favorite_places", favorites).apply();
+
+            adapter.notifyItemChanged(position);
+        }
     }
 
     @Override
@@ -128,6 +160,21 @@ public class PlacesListActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private int getMenuItemIdForCategory(String category) {
+        switch (category) {
+            case "Hotels":
+                return R.id.nav_hotels;
+            case "Restaurants":
+                return R.id.nav_restaurants;
+            case "Tourist Sites":
+                return R.id.nav_tourist_sites;
+            case "Favorites":
+                return R.id.nav_favorites;
+            default:
+                return R.id.nav_tourist_sites;
+        }
     }
 
     private List<Place> getPlacesByCategory(String category) {
@@ -182,7 +229,8 @@ public class PlacesListActivity extends BaseActivity {
                             obj.getString("email"),
                             (float) obj.getDouble("rating"),
                             obj.getInt("reviewCount"),
-                            isFavorite
+                            isFavorite,
+                            obj.getString("category")
                     ));
                 }
             }

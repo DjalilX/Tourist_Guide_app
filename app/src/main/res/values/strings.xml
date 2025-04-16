@@ -1,7 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Algiers Tourist Guide</string>
     <string name="app_description">Welcome to the Algiers Tourist Guide App, your companion for exploring the vibrant capital of Algeria. Discover iconic landmarks, cozy hotels, and delicious dining options in Algiers.</string>
-    <string name="student_names">John Doe, Jane Smith, Alex Johnson</string>
+    <string name="explore_algiers">Explore Algiers</string>
+    <string name="student_names">Kahlane Abdeldjalil, Ryan Khelfa, Hamidi Islam, Yanis Belhareth,\nGroup: SI03</string>
     <string name="btnChangeLanguage">Change Language</string>
     <string name="category_tourist_sites">Tourist Sites</string>
     <string name="category_hotels">Hotels</string>
@@ -14,32 +16,34 @@
     <string name="favorite_toggle_desc">Toggle favorite status</string>
     <string name="search">Search</string>
     <string name="no_places">No places available</string>
-    <string name="review_count">%d reviews</string> <!-- New -->
-
-    <!-- Tourist Sites -->
-    <string name="martyrs_memorial_name">Martyrs’ Memorial</string>
-    <string name="martyrs_memorial_desc">An iconic monument in Algiers commemorating the Algerian War of Independence, offering stunning views of the city.</string>
-    <string name="notre_dame_name">Notre Dame d’Afrique</string>
-    <string name="notre_dame_desc">A historic Catholic basilica overlooking the Bay of Algiers, known for its stunning architecture and serene atmosphere.</string>
-    <string name="casbah_name">Casbah of Algiers</string>
-    <string name="casbah_desc">A UNESCO World Heritage site, this ancient citadel features narrow streets, Ottoman palaces, and a rich history.</string>
-
-    <!-- Hotels -->
-    <string name="el_aurassi_name">El Aurassi Hotel</string>
-    <string name="el_aurassi_desc">A luxurious 5-star hotel in Algiers with panoramic views, modern amenities, and proximity to major landmarks.</string>
-    <string name="sofitel_name">Sofitel Algiers</string>
-    <string name="sofitel_desc">A stylish hotel blending French elegance with Algerian hospitality, featuring a pool and gourmet dining.</string>
-    <string name="marriott_name">Marriott Algiers</string>
-    <string name="marriott_desc">A contemporary hotel offering comfortable rooms, business facilities, and easy access to Algiers’ attractions.</string>
-
-    <!-- Restaurants -->
-    <string name="le_tantra_name">Le Tantra</string>
-    <string name="le_tantra_desc">A trendy restaurant in Algiers serving a fusion of Mediterranean and Algerian cuisine in a chic setting.</string>
-    <string name="dar_el_qods_name">Dar El Qods</string>
-    <string name="dar_el_qods_desc">A cozy spot offering traditional Algerian dishes like couscous and tagine, with a warm, authentic vibe.</string>
-    <string name="el_djazair_name">El Djazair Restaurant</string>
-    <string name="el_djazair_desc">Fine dining with a focus on local seafood and Algerian specialties, located in the heart of Algiers.</string>
+    <string name="review_count">%d reviews</string>
+    <string name="category_home">Home</string>
+    <string name="photo_image_desc">Place photo</string>
     <string name="photo_thumbnail_desc">Thumbnail photo of place</string>
     <string name="close_gallery_desc">Close photo gallery</string>
     <string name="full_photo_desc">Full-screen photo of place</string>
+
+    <!-- Tourist Sites -->
+    <string name="martyrs_memorial_name">Martyrs’ Memorial</string>
+    <string name="martyrs_memorial_desc">The Martyrs’ Memorial, or Maqam Echahid, is a striking concrete monument in Algiers, built in 1982 to honor heroes of the Algerian War of Independence. Its palm-leaf design towers over the city, offering breathtaking views of the bay and surrounding hills. Surrounded by lush gardens and a museum, it’s a must-visit for history buffs and those seeking panoramic photo spots.</string>
+    <string name="notre_dame_name">Notre Dame d’Afrique</string>
+    <string name="notre_dame_desc">Perched on a cliff overlooking Algiers’ bay, Notre Dame d’Afrique is a 19th-century basilica blending Byzantine and Romanesque styles. Known for its ornate interiors and serene ambiance, it attracts visitors with its stunning sea views and historical significance as a symbol of cultural harmony. The hilltop location offers a peaceful retreat, ideal for reflection and photography.</string>
+    <string name="casbah_name">Casbah of Algiers</string>
+    <string name="casbah_desc">The Casbah, a UNESCO World Heritage site, is Algiers’ historic heart, with roots dating back to the 10th century. Its labyrinthine alleys house ancient mosques, Ottoman palaces, and vibrant markets. Explore the Dar Aziza Palace or Ketchaoua Mosque to feel its rich past. A living neighborhood, it buzzes with local life, offering an authentic dive into Algerian culture and history.</string>
+
+    <!-- Hotels -->
+    <string name="el_aurassi_name">El Aurassi Hotel</string>
+    <string name="el_aurassi_desc">El Aurassi Hotel, a 5-star landmark in Algiers, boasts modern elegance with spacious rooms and sweeping views of the Mediterranean. Located near government offices and cultural sites, it offers a pool, spa, and multiple dining options featuring Algerian and international cuisine. Ideal for business travelers and tourists, its attentive service and prime location make every stay memorable and convenient.</string>
+    <string name="sofitel_name">Sofitel Algiers</string>
+    <string name="sofitel_desc">Sofitel Algiers Hamma Garden blends French sophistication with Algerian warmth in a lush, garden-like setting. Its stylish rooms feature plush bedding and city views, while amenities include an outdoor pool, fitness center, and gourmet restaurants serving local and European dishes. Perfect for relaxation or business, it’s close to the Botanical Garden and Algiers’ vibrant downtown, ensuring a refined stay.</string>
+    <string name="marriott_name">Marriott Algiers</string>
+    <string name="marriott_desc">Marriott Algiers offers contemporary comfort in Bab Ezzouar, near the airport and shopping centers. With sleek rooms, high-speed Wi-Fi, and versatile meeting spaces, it caters to both leisure and business guests. Enjoy on-site dining with Algerian specialties or unwind at the fitness center. Its strategic location makes exploring Algiers’ museums, beaches, and historic sites effortless and enjoyable.</string>
+
+    <!-- Restaurants -->
+    <string name="le_tantra_name">Le Tantra</string>
+    <string name="le_tantra_desc">Le Tantra is a chic Algiers restaurant where Mediterranean and Algerian flavors meet in a trendy, modern setting. Its menu features fresh seafood, spiced tagines, and creative desserts, paired with an extensive wine list. Popular with locals and tourists, the vibrant ambiance and outdoor terrace make it ideal for lively dinners or special occasions, centrally located for easy access.</string>
+    <string name="dar_el_qods_name">Dar El Qods</string>
+    <string name="dar_el_qods_desc">Dar El Qods offers an authentic taste of Algeria in a cozy, family-run setting that feels like home. Signature dishes include fluffy couscous, slow-cooked lamb tagine, and baklava, all crafted with traditional recipes. Located in Algiers’ heart, its warm decor and friendly service create a welcoming vibe, perfect for visitors craving genuine local cuisine and cultural immersion.</string>
+    <string name="el_djazair_name">El Djazair Restaurant</string>
+    <string name="el_djazair_desc">El Djazair Restaurant, nestled in central Algiers, specializes in upscale Algerian dining with an emphasis on fresh seafood and regional dishes. Savor grilled fish, spicy chorba soup, or classic mechoui in an elegant setting with attentive service. Ideal for food lovers, its proximity to landmarks and refined atmosphere make it a top choice for memorable meals and celebrations.</string>
 </resources>
