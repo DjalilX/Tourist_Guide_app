@@ -36,13 +36,31 @@ Tourist_Guide_app/
 │   │   │   │   ├── MainActivity.java
 │   │   │   │   ├── PlacesListActivity.java
 │   │   │   │   ├── PlaceDetailsActivity.java
-│   │   │   │   ├── adapters/PlacesAdapter.java
-│   │   │   │   ├── models/Place.java
+│   │   │   │   ├── adapters/
+│   │   │   │   │   ├── PhotoAdapter.java
+│   │   │   │   │   ├── PlacesAdapter.java
+│   │   │   │   ├── models/
+│   │   │   │   │   ├── Place.java
 │   │   │   ├── res/
 │   │   │   │   ├── layout/
+│   │   │   │   │   ├── activity_main.xml
+│   │   │   │   │   ├── activity_places_list.xml
+│   │   │   │   │   ├── activity_place_details.xml
+│   │   │   │   │   ├── dialog_photo_viewer.xml
+│   │   │   │   │   ├── item_photo.xml
+│   │   │   │   │   ├── item_gallery_photo.xml
+│   │   │   │   │   ├── item_full_screen.xml
+│   │   │   │   │   ├── list_item_place.xml
 │   │   │   │   ├── values/
+│   │   │   │   │   ├── strings.xml
+│   │   │   │   │   ├── strings-ar.xml
+│   │   │   │   │   ├── styles.xml
 │   │   │   │   ├── drawable/
-│   │   ├── AndroidManifest.xml
+│   │   │   │   │   ├── rounder_border.xml
+│   │   │   │   │   ├── bottom_nav_colors.xml
+│   │   │   │   │   ├── dot_active.xml
+│   │   │   │   │   ├── dot_inactive.xml
+│   │   │   ├── AndroidManifest.xml
 ├── README.md
 ```
 
